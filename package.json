@@ -5,15 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --watch",
-    "start": "ts-node-dev --respawn --transpile-only ./src/server.ts"
+    "ts.check": "tsc --noEmit --skipLibCheck",
+    "build": "rimraf dist && tsc",
+    "add-build": "git add dist",
+    "start": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "precommit": "npm run ts.check  npm run build  npm run add-build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "mongoose": "^8.0.3",
-    "ts-node-dev": "^2.0.0"
+    "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.5",
+    "ts-node-dev": "^2.0.0",
+    "vercel": "^33.0.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -23,5 +29,10 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "typescript": "^5.3.3"
-  }
+  },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ]
 }

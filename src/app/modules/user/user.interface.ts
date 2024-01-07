@@ -1,7 +1,6 @@
 export type user={
-    id:string
+    id:number
     name:string,
     email:string,
-    password:string,
     photo:string
 }
