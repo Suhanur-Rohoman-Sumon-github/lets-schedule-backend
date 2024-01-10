@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 import app from './app'
-const port = 5000
+const port = 3000
 async function main() {
   try {
     await mongoose.connect(`${process.env.Database_Url}` as string)

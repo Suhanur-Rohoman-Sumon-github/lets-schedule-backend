@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ts.check": "tsc --noEmit --skipLibCheck",
-    "build": "rimraf dist && tsc",
+    "build": " tsc --watch",
     "add-build": "git add dist",
     "start": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "starts": "node ./dist/server.js",
     "precommit": "npm run ts.check  npm run build  npm run add-build"
   },
   "keywords": [],
