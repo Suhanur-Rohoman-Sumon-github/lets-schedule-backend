@@ -6,5 +6,6 @@ router.post("/creat-event",EventController.creatNewEvent)
 router.get("/get-event",EventController.Events)
 router.get("/get-SingleEvents",EventController.SingleEvents)
 router.delete("/delete-event",EventController.deleteSingleEvent)
+router.patch("/update-date-and-time",EventController.updateDateAndTime)
 
 export const  EventRouter = router

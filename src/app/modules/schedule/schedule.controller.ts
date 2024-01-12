@@ -62,10 +62,29 @@ const deleteSingleEvent = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
+const updateDateAndTime = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.query.id as string;
+        const date = req.body.date.dateAndTime
+        
+        
+        const results = await scheduler.updateDateAndTimeInMongoDB(id,date);
+        
+        res.status(200).json({
+            sucsees: true,
+            massage: 'event is updated successfully',
+            data: results,
+        });
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
 
 export const EventController = {
     creatNewEvent,
     Events ,
     deleteSingleEvent ,
-    SingleEvents
+    SingleEvents,
+    updateDateAndTime
 };

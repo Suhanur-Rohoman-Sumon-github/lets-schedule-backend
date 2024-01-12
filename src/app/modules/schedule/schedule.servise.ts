@@ -18,10 +18,17 @@ const deleteSingleEventFromDB = async (id: string) => {
     const result = await ScheduleModel.deleteOne({ scheduleId: id });
     return result;
 };
+const updateDateAndTimeInMongoDB = async (id: string,date:string) => {
+    const filter = { scheduleId: id }; 
+    const update = { $set: { dateAndTime:date  } };
+    const result = await ScheduleModel.updateOne(filter, update);
+    return result
+};
 
 export const scheduler = {
     creatEventInDb,
     getEventsFromDB,
     deleteSingleEventFromDB,
-    getSingleEventsFromDB
+    getSingleEventsFromDB,
+    updateDateAndTimeInMongoDB
 }
