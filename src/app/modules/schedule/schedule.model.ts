@@ -12,7 +12,7 @@ const ScheduleSchema = new Schema<schedule>({
   userEmail: { type: String, required: [true, "user Email is required"] },
   method: { type: String, required: [true, "method is required"] },
   userName: { type: String, required: [true, "userName is required"] },
-  dateAndTime: { type: String, required: [true, "dateAndTime is required"] },
+  dateAndTime: { type: String  }
 });
 
 export const ScheduleModel = model<schedule>("schedule", ScheduleSchema);

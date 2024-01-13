@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { scheduler } from "./schedule.servise";
-
 const creatNewEvent = async (req: Request, res: Response) => {
     try {
         const event = req.body.event;
@@ -66,8 +65,6 @@ const updateDateAndTime = async (req: Request, res: Response) => {
     try {
         const id: string = req.query.id as string;
         const date = req.body.date.dateAndTime
-        
-        
         const results = await scheduler.updateDateAndTimeInMongoDB(id,date);
         
         res.status(200).json({
@@ -80,11 +77,26 @@ const updateDateAndTime = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
+const emailSend = async (req: Request, res: Response) => {
+    try {
+        const data = req.body.emailInfo
+        const results = await scheduler.sendEmail(data)
+        return res.status(200).json({
+            success: true,
+            message: 'Email sent successfully',
+            data: results,
+        });
+    } catch (error) {
+        console.error('Error sending email:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 export const EventController = {
     creatNewEvent,
     Events ,
     deleteSingleEvent ,
     SingleEvents,
-    updateDateAndTime
+    updateDateAndTime,
+    emailSend
 };
