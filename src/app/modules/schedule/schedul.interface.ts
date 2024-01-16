@@ -10,8 +10,10 @@ export type schedule ={
     method:string
     email:string,
     scheduleLocation:string,
-    userName:string
-    dateAndTime:string
+    userName:string,
+    dateAndTime:string,
+    role:string,
+    currentPackag:string
 }
 
 export type email = {

@@ -12,6 +12,10 @@ const getEventsFromDB = async (email: string) => {
     const result = await ScheduleModel.find({ userEmail: email });
     return result;
 };
+const getAllEventsFromDB = async () => {
+    const result = await ScheduleModel.find();
+    return result;
+};
 const getSingleEventsFromDB = async (id: string) => {
     const result = await ScheduleModel.findOne({ scheduleId: id });
     return result;
@@ -47,7 +51,7 @@ const sendEmail = async (data:email) => {
             to: `${email}`,
             subject: `let's schedule new event booked`,
             text: 'Hello world?', 
-            html: `<div style="max-width: 500px; width: 96%; border: 1px solid #777; padding: 20px; background: rgba(0, 0, 255, 0.1); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; border-radius: 10px;">
+            html: `<div style="max-width: 500px; width: 96%; border: 2px solid #0069ff; padding: 20px; background: rgba(0, 0, 255, 0.1); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; border-radius: 10px;">
             <p >Hi ${name},</p>
             <p  style=" margin: 0;">A new event scheduled has been confirmed with ${userName}.</p>
             <h4 style="margin-bottom: 5px;">Event Name:</h4>
@@ -68,5 +72,6 @@ export const scheduler = {
     deleteSingleEventFromDB,
     getSingleEventsFromDB,
     updateDateAndTimeInMongoDB,
-    sendEmail
+    sendEmail,
+    getAllEventsFromDB
 }

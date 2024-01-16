@@ -34,6 +34,18 @@ const Events = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
+const AllEvents = async (req: Request, res: Response) => {
+    try {
+       
+
+        const results = await scheduler.getAllEventsFromDB();
+        
+        res.status(200).json(results);
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
 const SingleEvents = async (req: Request, res: Response) => {
     try {
         const id: string = req.query.id as string;
@@ -98,5 +110,6 @@ export const EventController = {
     deleteSingleEvent ,
     SingleEvents,
     updateDateAndTime,
-    emailSend
+    emailSend,
+    AllEvents
 };
