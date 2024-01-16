@@ -36,10 +36,8 @@ const Events = async (req: Request, res: Response) => {
 };
 const AllEvents = async (req: Request, res: Response) => {
     try {
-       
 
         const results = await scheduler.getAllEventsFromDB();
-        
         res.status(200).json(results);
     } catch (error) {
         console.error("Error fetching events:", error);
@@ -89,6 +87,22 @@ const updateDateAndTime = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
+const getSingleDateAndTimeFromDb = async (req: Request, res: Response) => {
+    try {
+        const date: string = req.query.date as string;
+        console.log(date);
+        const results = await scheduler.getSpecificDateDataInDb(date);
+        
+        res.status(200).json({
+            sucsees: true,
+            massage: 'event is updated successfully',
+            data: results,
+        });
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
 const emailSend = async (req: Request, res: Response) => {
     try {
         const data = req.body.emailInfo
@@ -111,5 +125,6 @@ export const EventController = {
     SingleEvents,
     updateDateAndTime,
     emailSend,
-    AllEvents
+    AllEvents,
+    getSingleDateAndTimeFromDb
 };

@@ -1,8 +1,8 @@
 export type user={
-    id:number
+    id:string
     name:string,
     email:string,
     photo:string,
     role:string,
-    currentPackag:string
+    currentPlane:string
 }
