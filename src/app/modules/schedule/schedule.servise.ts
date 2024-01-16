@@ -3,6 +3,7 @@ import { ScheduleModel } from "./schedule.model";
 import { email, schedule } from "./schedul.interface";
 import nodemailer from "nodemailer";
 import dotenv from 'dotenv'
+import  moment from 'moment';
 dotenv.config()
 const creatEventInDb =async (event:schedule) => {
     const result = await ScheduleModel.create(event)
@@ -29,6 +30,14 @@ const updateDateAndTimeInMongoDB = async (id: string,date:string) => {
     const update = { $set: { dateAndTime:date  } };
     const result = await ScheduleModel.updateOne(filter, update);
     return result
+};
+const getSpecificDateDataInDb = async (date: string) => {
+    console.log(date);
+    const scheduleDate = date.toString();
+    console.log(scheduleDate);
+const result = await ScheduleModel.findOne({ dateAndTime: scheduleDate });
+  
+    return result;
 };
 const sendEmail = async (data:email) => {
     const {userName,name,userEmail,eventName,dateAndTime,method,meetLink,detailsLink,email} = data 
@@ -73,5 +82,6 @@ export const scheduler = {
     getSingleEventsFromDB,
     updateDateAndTimeInMongoDB,
     sendEmail,
-    getAllEventsFromDB
+    getAllEventsFromDB,
+    getSpecificDateDataInDb
 }
