@@ -15,7 +15,7 @@ const creatUser = async (req: Request, res: Response) => {
     } catch (error) {
       res.status(500).json({
         sucsees: false,
-        massage: 'sothing went wrong',
+        massage: 'something went wrong',
         data: error,
       })
     }
