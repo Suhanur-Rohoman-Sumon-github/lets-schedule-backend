@@ -7,7 +7,9 @@ const userSchema = new Schema<user>({
     email:{type:String,required:[true,"Email is required"]},
     photo:{type:String,required:[true,"Photo is required"]},
     role: { type: String,required:[true, "userName is required"]  },
-    currentPlane: { type: String,required:[true, "userName is required"]  }
+    currentPlane: { type: String,required:[true, "userName is required"]  },
+    ban: { type: Boolean },
+    currentPackage: String,
 })
 
 export const userModel = model<user>("user",userSchema)

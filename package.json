@@ -21,6 +21,7 @@
     "nodemailer": "^6.9.8",
     "pre-commit": "^1.2.2",
     "rimraf": "^5.0.5",
+    "stripe": "^14.12.0",
     "ts-node-dev": "^2.0.0",
     "vercel": "^33.0.2"
   },

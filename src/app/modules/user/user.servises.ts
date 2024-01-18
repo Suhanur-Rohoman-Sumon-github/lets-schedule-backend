@@ -22,8 +22,39 @@ const creatUserIntoDB = async (user: user) => {
     
     return {isAdmin };
   }
- 
-  
+  const makeAUserAdminInDb = async (email:string) => {
+    const filter = { email: email }; 
+    const update = { $set: { role:"admin"  } };
+    const result = await userModel.updateOne(filter, update);
+    return result
+   
+  }
+  const makeAUserBan = async (email:string) => {
+    const filter = { email: email }; 
+    const update = { $set: { role:"ban"} };
+    const result = await userModel.updateOne(filter, update);
+    return result
+   
+  }
+  const getIsBanInDB = async (email:string) => {
+    const user = await userModel.findOne({ email });
+    const isBan = user?.role === 'ban';
+    return isBan ;
+  }
+  const makeAUserInDB = async (email:string) => {
+    const filter = { email: email }; 
+    const update = { $set: { role:"user"} };
+    const result = await userModel.updateOne(filter, update);
+    return result
+  }
+  const makeAUserProInDB = async (email:string,plane:string) => {
+    const filter = { email: email }; 
+    const update = {
+      $set: { currentPlane: "pro", currentPackage: plane },
+    };
+    const result = await userModel.updateOne(filter, update);
+    return result
+  }
   const getSingleDatafromDB = async (id: string) => {
     const result = await  userModel.findOne({ id })
     return result
@@ -34,4 +65,9 @@ const creatUserIntoDB = async (user: user) => {
     getAllUserDB,
     getSingleDatafromDB,
     getIsAdminDB,
+    makeAUserAdminInDb,
+    makeAUserBan,
+    getIsBanInDB,
+    makeAUserInDB,
+    makeAUserProInDB
   }

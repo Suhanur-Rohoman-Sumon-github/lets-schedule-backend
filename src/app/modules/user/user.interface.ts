@@ -4,5 +4,7 @@ export type user={
     email:string,
     photo:string,
     role:string,
-    currentPlane:string
+    currentPlane:string,
+    ban:boolean,
+    currentPackage:string
 }

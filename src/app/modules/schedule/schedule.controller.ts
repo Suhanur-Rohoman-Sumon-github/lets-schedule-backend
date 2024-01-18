@@ -90,7 +90,7 @@ const updateDateAndTime = async (req: Request, res: Response) => {
 const getSingleDateAndTimeFromDb = async (req: Request, res: Response) => {
     try {
         const date: string = req.query.date as string;
-        console.log(date);
+        
         const results = await scheduler.getSpecificDateDataInDb(date);
         
         res.status(200).json({
@@ -103,20 +103,8 @@ const getSingleDateAndTimeFromDb = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
-const emailSend = async (req: Request, res: Response) => {
-    try {
-        const data = req.body.emailInfo
-        const results = await scheduler.sendEmail(data)
-        return res.status(200).json({
-            success: true,
-            message: 'Email sent successfully',
-            data: results,
-        });
-    } catch (error) {
-        console.error('Error sending email:', error);
-        return res.status(500).json({ error: 'Internal server error' });
-    }
-};
+
+
 
 export const EventController = {
     creatNewEvent,
@@ -124,7 +112,8 @@ export const EventController = {
     deleteSingleEvent ,
     SingleEvents,
     updateDateAndTime,
-    emailSend,
+    
     AllEvents,
-    getSingleDateAndTimeFromDb
+    getSingleDateAndTimeFromDb,
+    
 };
