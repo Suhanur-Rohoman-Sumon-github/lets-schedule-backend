@@ -1,4 +1,6 @@
 import express, { Application, Request, Response } from 'express'
+const stripe = require("stripe")(process.env.PAYMENT_SECRET_KEY);
+
 const app: Application = express()
 import cors from 'cors'
 import { UserRouter } from './app/modules/user/user.route'
@@ -17,5 +19,7 @@ app.use('/api/v1/payments',PaymentRouter )
 app.get('/', (req: Request, res: Response) => {
   res.send('scheduling is building')
 })
+
+
 
 export default app
