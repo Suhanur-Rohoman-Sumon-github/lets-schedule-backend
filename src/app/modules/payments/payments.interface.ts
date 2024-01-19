@@ -4,5 +4,6 @@ export type payments = {
     userEmail:string,
     transitionId:string,
     date:string,
-    amount:number
+    amount:number,
+    packages:string
    }

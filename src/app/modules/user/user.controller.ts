@@ -142,6 +142,24 @@ const creatUser = async (req: Request, res: Response) => {
         })
       }
   }
+  const getAllProUserFromDb =async (req:Request,res:Response) => {
+    try {
+      
+        const results = await UserServises.getAllProUserInDb()
+        
+        res.status(200).json(
+         
+          results
+        
+        )
+      } catch (error) {
+        res.status(500).json({
+          sucsees: false,
+          massage: 'sothing went wrong',
+          data: error,
+        })
+      }
+  }
 
   export const UserController = {
     creatUser,
@@ -151,5 +169,6 @@ const creatUser = async (req: Request, res: Response) => {
     makeAUserBanFromDb,
     getAUserBanFromDb,
     makeAUserFromDb,
-    makeAUserProFromDb
+    makeAUserProFromDb,
+    getAllProUserFromDb
   }

@@ -20,7 +20,7 @@ const createPaymentIntentFromDb = async (req: Request, res: Response) => {
 const savePaymentsDataInDatabase = async (req: Request, res: Response) => {
     try {
         const paymentsData = req.body.paymentsData
-        console.log(paymentsData);
+       
         
         const results = await payments.savePaymentsDataInDb(paymentsData);
         
@@ -34,8 +34,38 @@ const savePaymentsDataInDatabase = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
+const getSinglePaymentsDataFromDb = async (req: Request, res: Response) => {
+    try {
+        const paymentsIds:  string = req.query.paymentsId as string;
+        
+        const results = await payments.getSinglePaymentsDataInDb(paymentsIds);
+        
+        res.status(200).json({
+            sucsees: true,
+            massage: 'payment single data received successfully',
+            data: results,
+        });
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
+const getAllPaymentFromDb = async (req: Request, res: Response) => {
+    try {
+        const results = await payments.getAllPaymentInDb();
+        
+        res.status(200).json(
+             results
+        );
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
 
 export const paymentsControllers = {
     createPaymentIntentFromDb,
-    savePaymentsDataInDatabase
+    savePaymentsDataInDatabase,
+    getAllPaymentFromDb,
+    getSinglePaymentsDataFromDb
 }

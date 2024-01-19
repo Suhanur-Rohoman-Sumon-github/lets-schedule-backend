@@ -37,8 +37,18 @@ const savePaymentsDataInDb =async (paymentsData:paymentsInterface) => {
     const result = await paymentsModel.create(paymentsData)
     return result
 }
+const getSinglePaymentsDataInDb =async (paymentId:string) => {
+  const result = await paymentsModel.findOne({ paymentsId: paymentId });
+  return result;
+}
+const getAllPaymentInDb =async () => {
+  const result = await paymentsModel.find();
+  return result;
+}
 
 export const payments = {
   createPaymentIntentInDb,
-  savePaymentsDataInDb
+  savePaymentsDataInDb,
+  getSinglePaymentsDataInDb,
+  getAllPaymentInDb
 };

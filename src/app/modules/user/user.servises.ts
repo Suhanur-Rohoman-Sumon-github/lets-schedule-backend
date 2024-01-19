@@ -59,6 +59,10 @@ const creatUserIntoDB = async (user: user) => {
     const result = await  userModel.findOne({ id })
     return result
   }
+  const getAllProUserInDb = async () => {
+    const result = await  userModel.find({ currentPlane:"pro" })
+    return result
+  }
   
   export const UserServises = {
     creatUserIntoDB,
@@ -69,5 +73,6 @@ const creatUserIntoDB = async (user: user) => {
     makeAUserBan,
     getIsBanInDB,
     makeAUserInDB,
-    makeAUserProInDB
+    makeAUserProInDB,
+    getAllProUserInDb
   }
