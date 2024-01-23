@@ -1,5 +1,5 @@
 import express, { Application, Request, Response } from 'express'
-const stripe = require("stripe")(process.env.PAYMENT_SECRET_KEY);
+
 
 const app: Application = express()
 import cors from 'cors'
@@ -7,6 +7,8 @@ import { UserRouter } from './app/modules/user/user.route'
 import { EventRouter } from './app/modules/schedule/schedule.route'
 import { EmailRote } from './app/modules/mail/mail.route'
 import { PaymentRouter } from './app/modules/payments/payment.route'
+import handleGlobalError from './midleware/GlobalErrorHandler';
+import notFoundRoute from './midleware/notFound'
 
 // parser
 app.use(express.json())
@@ -20,6 +22,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('scheduling is building')
 })
 
+// global error handler 
+app.use(handleGlobalError)
 
+// not found route 
+
+app.use(notFoundRoute)
 
 export default app

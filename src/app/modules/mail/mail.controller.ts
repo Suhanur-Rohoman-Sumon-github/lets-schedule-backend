@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { mail } from "./mail.servise";
 
-const emailSend = async (req: Request, res: Response) => {
+const emailSend = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const data = req.body.emailInfo
         const results = await mail.sendEmail(data)
@@ -11,8 +11,7 @@ const emailSend = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        console.error('Error sending email:', error);
-        return res.status(500).json({ error: 'Internal server error' });
+        next(error)
     }
 };
 

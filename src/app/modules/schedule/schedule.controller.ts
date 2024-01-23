@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { scheduler } from "./schedule.servise";
-const creatNewEvent = async (req: Request, res: Response) => {
+const creatNewEvent = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const event = req.body.event;
         const results = await scheduler.creatEventInDb(event);
@@ -10,15 +10,11 @@ const creatNewEvent = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        res.status(500).json({
-            sucsees: false,
-            massage: 'something is broken',
-            data: error,
-        });
+        next(error)
     }
 };
 
-const Events = async (req: Request, res: Response) => {
+const Events = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const userEmail: string = req.query.email as string;
 
@@ -30,32 +26,29 @@ const Events = async (req: Request, res: Response) => {
         
         res.status(200).json(results);
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
-const AllEvents = async (req: Request, res: Response) => {
+const AllEvents = async (req: Request, res: Response,next:NextFunction) => {
     try {
 
         const results = await scheduler.getAllEventsFromDB();
         res.status(200).json(results);
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
-const SingleEvents = async (req: Request, res: Response) => {
+const SingleEvents = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const id: string = req.query.id as string;
         const results = await scheduler.getSingleEventsFromDB(id);
         
         res.status(200).json(results);
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
-const deleteSingleEvent = async (req: Request, res: Response) => {
+const deleteSingleEvent = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const id: string = req.query.id as string;
         
@@ -67,11 +60,10 @@ const deleteSingleEvent = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
-const updateDateAndTime = async (req: Request, res: Response) => {
+const updateDateAndTime = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const id: string = req.query.id as string;
         const date = req.body.date.dateAndTime
@@ -83,11 +75,10 @@ const updateDateAndTime = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
-const getSingleDateAndTimeFromDb = async (req: Request, res: Response) => {
+const getSingleDateAndTimeFromDb = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const date: string = req.query.date as string;
         
@@ -99,8 +90,7 @@ const getSingleDateAndTimeFromDb = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
 

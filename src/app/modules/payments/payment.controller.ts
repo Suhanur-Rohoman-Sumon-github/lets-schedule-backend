@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { payments } from "./payment.servise";
 
-const createPaymentIntentFromDb = async (req: Request, res: Response) => {
+const createPaymentIntentFromDb = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const {price} = req.body
         
@@ -13,11 +13,10 @@ const createPaymentIntentFromDb = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+       next(error)
     }
 };
-const savePaymentsDataInDatabase = async (req: Request, res: Response) => {
+const savePaymentsDataInDatabase = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const paymentsData = req.body.paymentsData
        
@@ -30,11 +29,10 @@ const savePaymentsDataInDatabase = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
-const getSinglePaymentsDataFromDb = async (req: Request, res: Response) => {
+const getSinglePaymentsDataFromDb = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const paymentsIds:  string = req.query.paymentsId as string;
         
@@ -46,11 +44,10 @@ const getSinglePaymentsDataFromDb = async (req: Request, res: Response) => {
             data: results,
         });
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
-const getAllPaymentFromDb = async (req: Request, res: Response) => {
+const getAllPaymentFromDb = async (req: Request, res: Response,next:NextFunction) => {
     try {
         const results = await payments.getAllPaymentInDb();
         
@@ -58,8 +55,7 @@ const getAllPaymentFromDb = async (req: Request, res: Response) => {
              results
         );
     } catch (error) {
-        console.error("Error fetching events:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error)
     }
 };
 

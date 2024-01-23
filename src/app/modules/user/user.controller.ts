@@ -1,7 +1,7 @@
-import { Request, Response } from "express"
+import { NextFunction, Request, Response } from "express"
 import { UserServises } from "./user.servises"
 
-const creatUser = async (req: Request, res: Response) => {
+const creatUser = async (req: Request, res: Response,next:NextFunction) => {
     try {
       const user = req.body.user
       const results = await UserServises.creatUserIntoDB(user)
@@ -12,15 +12,11 @@ const creatUser = async (req: Request, res: Response) => {
         data: results,
       })
     } catch (error) {
-      res.status(500).json({
-        sucsees: false,
-        massage: 'something went wrong',
-        data: error,
-      })
+      next(error)
     }
   }
 
-  const getUserFromDb =async (req:Request,res:Response) => {
+  const getUserFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       
     
@@ -30,14 +26,10 @@ const creatUser = async (req: Request, res: Response) => {
            results,
         )
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
-  const getIsAdmFromDb =async (req:Request,res:Response) => {
+  const getIsAdmFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       const email = req.query.email as string
         const results = await UserServises.getIsAdminDB(email)
@@ -46,14 +38,10 @@ const creatUser = async (req: Request, res: Response) => {
           isAdmin
         })
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
-  const makeAUserAdminFromDb =async (req:Request,res:Response) => {
+  const makeAUserAdminFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       const email = req.query.email as string
         const results = await UserServises.makeAUserAdminInDb(email)
@@ -64,14 +52,10 @@ const creatUser = async (req: Request, res: Response) => {
         data: results,
         })
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
-  const makeAUserBanFromDb =async (req:Request,res:Response) => {
+  const makeAUserBanFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       const email = req.query.email as string
         const results = await UserServises.makeAUserBan(email)
@@ -82,14 +66,10 @@ const creatUser = async (req: Request, res: Response) => {
         data: results,
         })
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
-  const getAUserBanFromDb =async (req:Request,res:Response) => {
+  const getAUserBanFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       const email = req.query.email as string
         const results = await UserServises.getIsBanInDB(email)
@@ -98,14 +78,10 @@ const creatUser = async (req: Request, res: Response) => {
          results,
         )
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
-  const makeAUserFromDb =async (req:Request,res:Response) => {
+  const makeAUserFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       const email = req.query.email as string
         const results = await UserServises.makeAUserInDB(email)
@@ -114,14 +90,10 @@ const creatUser = async (req: Request, res: Response) => {
          results,
         )
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
-  const makeAUserProFromDb =async (req:Request,res:Response) => {
+  const makeAUserProFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       const email = req.query.email as string
       const planes = req.body.plane
@@ -135,14 +107,10 @@ const creatUser = async (req: Request, res: Response) => {
          }
         )
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
-  const getAllProUserFromDb =async (req:Request,res:Response) => {
+  const getAllProUserFromDb =async (req:Request,res:Response,next:NextFunction) => {
     try {
       
         const results = await UserServises.getAllProUserInDb()
@@ -153,11 +121,7 @@ const creatUser = async (req: Request, res: Response) => {
         
         )
       } catch (error) {
-        res.status(500).json({
-          sucsees: false,
-          massage: 'sothing went wrong',
-          data: error,
-        })
+        next(error)
       }
   }
 
