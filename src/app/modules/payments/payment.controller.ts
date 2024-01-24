@@ -4,16 +4,14 @@ import sendResponse from "../../../utils/sendRespons";
 import httpStatus from "http-status";
 import catchAsync from "../../../utils/cathAsync";
 
-
-
-const createPaymentIntentFromDb  = catchAsync(async (req, res,next) => {
+const createPaymentIntentFromDb  = catchAsync(async (req, res) => {
         const {price} = req.body     
         const results = await payments.createPaymentIntentInDb(price);      
         sendResponse(res,{
-        statusCode:  httpStatus.OK,
-        success:true,
-        message:"new payment intent added",
-        data:results
+            statusCode:  httpStatus.OK,
+            success:true,
+            message:"new payment intent added",
+            data:results
         })   
     });
 
@@ -21,20 +19,20 @@ const savePaymentsDataInDatabase  = catchAsync( async (req, res) => {
         const paymentsData = req.body.paymentsData
         const results = await payments.savePaymentsDataInDb(paymentsData);
         sendResponse(res,{
-        statusCode:httpStatus.OK,
-        success:true,
-        message:"payment data saved successfully ",
-        data:results
+            statusCode:httpStatus.OK,
+            success:true,
+            message:"payment data saved successfully ",
+            data:results
         })})
 
 const getSinglePaymentsDataFromDb = catchAsync(async (req, res) => { 
         const paymentsIds:  string = req.query.paymentsId as string;
         const results = await payments.getSinglePaymentsDataInDb(paymentsIds);
         sendResponse(res,{
-        statusCode:httpStatus.OK,
-        success:true,
-        message:"single payments data received successfully ",
-        data:results
+            statusCode:httpStatus.OK,
+            success:true,
+            message:"single payments data received successfully ",
+            data:results
         })})
     
 const getAllPaymentFromDb = catchAsync(async (req, res) => {
