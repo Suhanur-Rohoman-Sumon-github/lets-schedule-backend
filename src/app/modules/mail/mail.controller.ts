@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { mail } from "./mail.servise";
 
-const emailSend = async (req: Request, res: Response,next:NextFunction) => {
+const emailSend :RequestHandler = async (req, res,next) => {
     try {
         const data = req.body.emailInfo
         const results = await mail.sendEmail(data)
