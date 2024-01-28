@@ -3,8 +3,8 @@ import express, { Application, Request, Response } from 'express'
 
 const app: Application = express()
 import cors from 'cors'
-import handleGlobalError from './midleware/GlobalErrorHandler';
-import notFoundRoute from './midleware/notFound'
+import handleGlobalError from './middleware/GlobalErrorHandler';
+import notFoundRoute from './middleware/notFound'
 import router from './app/routes'
 
 // parser

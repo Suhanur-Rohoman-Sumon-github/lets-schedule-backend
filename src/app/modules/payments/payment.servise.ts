@@ -1,14 +1,13 @@
 import { payments as paymentsInterface } from './payments.interface';
-import dotenv from 'dotenv';
 import Stripe from 'stripe';
 import { paymentsModel } from './payments.model';
+import config from '../../config';
 
-dotenv.config();
-if (!process.env.STRIPE_SECRET_KEY) {
+if (!config.STRIPE_SECRET_KEY) {
   throw new Error('Stripe secret key is not set in the environment variables');
 }
 const stripeApiVersion: "2023-10-16" | null = null;
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = new Stripe(config.STRIPE_SECRET_KEY, {
   apiVersion: stripeApiVersion as any,
 });
 

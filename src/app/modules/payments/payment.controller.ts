@@ -5,7 +5,7 @@ import httpStatus from "http-status";
 import catchAsync from "../../../utils/cathAsync";
 
 const createPaymentIntentFromDb  = catchAsync(async (req, res) => {
-        const {price} = req.body     
+        const {price} = req.body    
         const results = await payments.createPaymentIntentInDb(price);      
         sendResponse(res,{
             statusCode:  httpStatus.OK,
@@ -17,6 +17,7 @@ const createPaymentIntentFromDb  = catchAsync(async (req, res) => {
 
 const savePaymentsDataInDatabase  = catchAsync( async (req, res) => {
         const paymentsData = req.body.paymentsData
+        
         const results = await payments.savePaymentsDataInDb(paymentsData);
         sendResponse(res,{
             statusCode:httpStatus.OK,

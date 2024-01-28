@@ -8,7 +8,7 @@ const paymentsSchema = new Schema<payments>({
     transitionId: { type: String, required: [true, "transitionId is required"] },
     date: { type: String, required: [true, "date is required"] },
     amount: { type: Number, required: [true, "amount is required"] },
-    packages: { type: String, default:"free" },
+    packages: { type: String,  },
   });
   
   export const paymentsModel = model<payments>("payments", paymentsSchema);

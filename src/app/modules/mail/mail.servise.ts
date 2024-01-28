@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { email } from "./mail.Interface";
+import config from "../../config";
 const sendEmail = async (data:email) => {
     const {userName,name,userEmail,eventName,dateAndTime,method,meetLink,detailsLink,email} = data 
         const transporter = nodemailer.createTransport({
@@ -8,8 +9,8 @@ const sendEmail = async (data:email) => {
             port: 587,
             secure: false,
             auth: {
-                user: process.env.email_user_name,
-                pass: process.env.email_user_password,
+                user: config.email_user_name,
+                pass: config.email_user_password,
             },
         });
 
