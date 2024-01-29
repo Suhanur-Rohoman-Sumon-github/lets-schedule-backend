@@ -4,7 +4,7 @@ import catchAsync from "../../../utils/cathAsync";
 import sendResponse from "../../../utils/sendRespons";
 import httpStatus from "http-status";
 
-
+// create new events
 const creatNewEvent = catchAsync(async (req, res) => {
     const event = req.body.event;
     const results = await scheduler.creatEventInDb(event);
@@ -16,6 +16,7 @@ const creatNewEvent = catchAsync(async (req, res) => {
         }) 
 });
 
+// get specific  users all schedule 
 const Events = catchAsync(async (req, res) => {
     const userEmail: string = req.query.email as string;
     if (!userEmail) {
@@ -24,15 +25,21 @@ const Events = catchAsync(async (req, res) => {
     const results = await scheduler.getEventsFromDB(userEmail);
     res.status(200).json(results); 
 })
+
+// get all the event already have been created yet
 const AllEvents = catchAsync(async (req, res) => {
     const results = await scheduler.getAllEventsFromDB();
     res.status(200).json(results)})
 ;
+
+// get single events withe event id 
 const SingleEvents =catchAsync( async (req, res) => {
     const id: string = req.query.id as string;
     const results = await scheduler.getSingleEventsFromDB(id);
     res.status(200).json(results);
 });
+
+// delete a single event withe event id 
 const deleteSingleEvent = catchAsync(async (req, res) => {
     const id: string = req.query.id as string;
     const results = await scheduler.deleteSingleEventFromDB(id);
@@ -43,6 +50,8 @@ const deleteSingleEvent = catchAsync(async (req, res) => {
         data:results
         })   
 });
+
+// update date and time which is user already  selected yet 
 const updateDateAndTime = catchAsync(async (req, res) => {
     const id: string = req.query.id as string;
     const date = req.body.date.dateAndTime
@@ -54,6 +63,8 @@ const updateDateAndTime = catchAsync(async (req, res) => {
         data:results
         }); 
 });
+
+// get single date and time only the date and time 
 const getSingleDateAndTimeFromDb = catchAsync(async (req, res) => { 
     const date: string = req.query.date as string;      
     const results = await scheduler.getSpecificDateDataInDb(date);      
@@ -64,6 +75,8 @@ const getSingleDateAndTimeFromDb = catchAsync(async (req, res) => {
         data:results
         });   
 });
+
+// send all the function as a object to receive in the event route 
 export const EventController = {
     creatNewEvent,
     Events ,
