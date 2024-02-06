@@ -3,6 +3,7 @@ import { PaymentRouter } from "../modules/payments/payment.route";
 import { UserRouter } from "../modules/user/user.route";
 import { EventRouter } from "../modules/schedule/schedule.route";
 import { EmailRote } from "../modules/mail/mail.route";
+import { messageRoute } from "../modules/message/message.route";
 
 const router = Router()
 
@@ -22,6 +23,10 @@ const moduleRoute = [
     {
         path:"/mail",
         route:EmailRote
+    },
+    {
+        path:"/message",
+        route:messageRoute
     }
 ]
 

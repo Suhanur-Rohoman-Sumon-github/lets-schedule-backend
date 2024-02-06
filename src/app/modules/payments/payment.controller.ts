@@ -5,8 +5,9 @@ import httpStatus from "http-status";
 import catchAsync from "../../../utils/cathAsync";
 
 const createPaymentIntentFromDb  = catchAsync(async (req, res) => {
-        const {price} = req.body    
-        const results = await payments.createPaymentIntentInDb(price);      
+        const {price} = req.body
+        const prices =  price.toFixed(2) 
+        const results = await payments.createPaymentIntentInDb(prices);      
         sendResponse(res,{
             statusCode:  httpStatus.OK,
             success:true,

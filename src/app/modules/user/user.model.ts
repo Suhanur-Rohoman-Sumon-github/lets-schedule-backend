@@ -12,4 +12,6 @@ const userSchema = new Schema<user>({
     currentPackage: String,
 });
 
+
+
 export const userModel = model<user>("user", userSchema);

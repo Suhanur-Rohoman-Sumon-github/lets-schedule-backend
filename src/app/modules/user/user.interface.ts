@@ -1,3 +1,5 @@
+import { Model } from "mongoose"
+
 export type user={
     id:string
     name:string,
@@ -8,3 +10,4 @@ export type user={
     ban:boolean,
     currentPackage:string
 }
+

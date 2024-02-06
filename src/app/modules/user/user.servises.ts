@@ -6,8 +6,7 @@ const creatUserIntoDB = async (user: user) => {
   const existingUser = await userModel.findOne({ email: user?.email });
 
   if (existingUser) {
-    
-    return "user already exist"
+    throw new Error("user already exists")
   }
     const result = await userModel.create(user)
     return result
