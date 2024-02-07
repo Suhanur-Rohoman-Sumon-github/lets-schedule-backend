@@ -6,5 +6,6 @@ const router = express.Router()
 router.post("/save-message" ,messageController.saveMessageDataInDatabase)
 router.get("/single-message" ,messageController.getSingleMessageDataFromDb)
 router.patch("/update-message" ,messageController.updateMessageDataFromDb)
+router.get("/all-message" ,messageController.GetAllMessageDataFromDb)
 
 export const  messageRoute = router

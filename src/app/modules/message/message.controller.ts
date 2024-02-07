@@ -34,9 +34,29 @@ const saveMessageDataInDatabase  = catchAsync( async (req, res) => {
             message:"new message added successfully ",
             data:results
         })})
+    const GetAllMessageDataFromDb = catchAsync(async (req, res) => { 
+        
+        const results = await messagesData.GetAllMessageDataInDb();
+        sendResponse(res,{
+            statusCode:httpStatus.OK,
+            success:true,
+            message:"new message added successfully ",
+            data:results
+        })})
+    const GetSpecificMessageDataFromDb = catchAsync(async (req, res) => { 
+        const email:  string = req.query.emails as string;
+        const results = await messagesData.getSpecificMessageDataInDb(email);
+        sendResponse(res,{
+            statusCode:httpStatus.OK,
+            success:true,
+            message:"new message added successfully ",
+            data:results
+        })})
 
     export const messageController = {
         saveMessageDataInDatabase ,
         getSingleMessageDataFromDb,
-        updateMessageDataFromDb
+        updateMessageDataFromDb,
+        GetAllMessageDataFromDb,
+        GetSpecificMessageDataFromDb
     }

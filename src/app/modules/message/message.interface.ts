@@ -2,10 +2,10 @@ export type message  = {
     messageId:string,
     userName : string,
     userEmail:string,
-    date:string,
-    photoUrl:string,
+    date:Date,
+    photoUrls:string,
     messages: Array<{
-        sender: string; // 'user' or 'admin'
+        sender: string; 
         content: string;
         timestamp: Date;
     }>;
