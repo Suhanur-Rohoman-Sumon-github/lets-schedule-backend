@@ -30,6 +30,22 @@ const getIsAdmFromDb =catchAsync(async (req, res) => {
         isAdmin
       })   
 })
+const getIsModeratorFromDb =catchAsync(async (req, res) => {
+  const email = req.query.email as string
+  const results = await UserServises.getIsModeratorInDB(email)
+  const isModerator = results || false;
+      res.status(httpStatus.OK).json({
+        isModerator
+      })   
+})
+const getIsUserFromDb =catchAsync(async (req, res) => {
+  const email = req.query.email as string
+  const results = await UserServises.getIsUserInDB(email)
+  const isUser = results || false;
+      res.status(httpStatus.OK).json({
+        isUser
+      })   
+})
 
 const makeAUserAdminFromDb =catchAsync(async (req, res) => {
   const email = req.query.email as string
@@ -98,5 +114,7 @@ const getAllProUserFromDb =catchAsync(async (req, res) => {
     getAUserBanFromDb,
     makeAUserFromDb,
     makeAUserProFromDb,
-    getAllProUserFromDb
+    getAllProUserFromDb,
+    getIsModeratorFromDb,
+    getIsUserFromDb
   }

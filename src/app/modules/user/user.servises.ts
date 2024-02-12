@@ -25,6 +25,18 @@ const creatUserIntoDB = async (user: user) => {
     
     return {isAdmin };
   }
+  const getIsModeratorInDB = async (email:string) => {
+    const user = await userModel.findOne({ email });
+    const isModerator = user?.role === 'moderator';
+    
+    return isModerator;
+  }
+  const getIsUserInDB = async (email:string) => {
+    const user = await userModel.findOne({ email });
+    const isUser = user?.role === 'user';
+    
+    return isUser;
+  }
 
   // handle make a user as a admin
   const makeAUserAdminInDb = async (email:string) => {
@@ -92,5 +104,7 @@ const creatUserIntoDB = async (user: user) => {
     getIsBanInDB,
     makeAUserInDB,
     makeAUserProInDB,
-    getAllProUserInDb
+    getAllProUserInDb,
+    getIsModeratorInDB,
+    getIsUserInDB
   }

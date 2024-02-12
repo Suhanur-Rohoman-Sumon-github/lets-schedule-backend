@@ -29,7 +29,7 @@ const updateSingleMessageDataInDb =async (userEmail:string, payload:message) => 
     return result;
   }
 const GetAllMessageDataInDb =async () => {
-    const result = await messageModal.find().select('userName photoUrls userEmail')
+    const result = await messageModal.find().select('userName photoUrls userEmail').sort({ "date": -1 })
     return result;
   }
 

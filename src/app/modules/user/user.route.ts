@@ -14,6 +14,8 @@ router.get('/make-ban', UserController.makeAUserBanFromDb)
 router.get('/make-user', UserController.makeAUserFromDb)
 router.get("/all-user",UserController.getUserFromDb)
 router.get("/get-isAdmin",UserController.getIsAdmFromDb)
+router.get("/get-isModerator",UserController.getIsModeratorFromDb)
+router.get("/get-isUser",UserController.getIsUserFromDb)
 router.get("/get-isBan",UserController.getAUserBanFromDb)
 router.get("/get-all-pro-user",UserController.getAllProUserFromDb)
 
