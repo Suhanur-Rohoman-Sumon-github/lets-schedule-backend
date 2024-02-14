@@ -8,6 +8,8 @@ const messageSchema = new Schema<message  >({
     userEmail: { type: String,  },
     date: { type: Date, default: Date.now },
     photoUrls: { type: String },
+    category: { type: String },
+    subCategory:{type:String,default:'unSeen'},
     messages: [
     {
       sender: { type: String  }, 

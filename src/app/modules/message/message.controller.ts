@@ -27,7 +27,9 @@ const saveMessageDataInDatabase  = catchAsync( async (req, res) => {
     const updateMessageDataFromDb = catchAsync(async (req, res) => { 
         const email:  string = req.query.emails as string;
         const newMessage = req.body.newMessage
-        const results = await messagesData.updateSingleMessageDataInDb(email,newMessage);
+        const subcategory = req.body.subcategory
+        console.log(subcategory);
+        const results = await messagesData.updateSingleMessageDataInDb(email,newMessage,subcategory);
         sendResponse(res,{
             statusCode:httpStatus.OK,
             success:true,
@@ -35,8 +37,17 @@ const saveMessageDataInDatabase  = catchAsync( async (req, res) => {
             data:results
         })})
     const GetAllMessageDataFromDb = catchAsync(async (req, res) => { 
-        
+       
         const results = await messagesData.GetAllMessageDataInDb();
+        sendResponse(res,{
+            statusCode:httpStatus.OK,
+            success:true,
+            message:"new message added successfully ",
+            data:results
+        })})
+    const GetSubCategoryMessageDataFromDb = catchAsync(async (req, res) => { 
+        const subCategory:  string = req.query.subCategory as string;
+        const results = await messagesData.GetSubCategoryMessageDataInDb(subCategory);
         sendResponse(res,{
             statusCode:httpStatus.OK,
             success:true,
@@ -58,5 +69,6 @@ const saveMessageDataInDatabase  = catchAsync( async (req, res) => {
         getSingleMessageDataFromDb,
         updateMessageDataFromDb,
         GetAllMessageDataFromDb,
-        GetSpecificMessageDataFromDb
+        GetSpecificMessageDataFromDb,
+        GetSubCategoryMessageDataFromDb
     }

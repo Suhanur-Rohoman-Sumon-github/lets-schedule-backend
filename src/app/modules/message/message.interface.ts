@@ -3,6 +3,8 @@ export type message  = {
     userName : string,
     userEmail:string,
     date:Date,
+    category:string,
+    subCategory:string,
     photoUrls:string,
     messages: Array<{
         sender: string; 

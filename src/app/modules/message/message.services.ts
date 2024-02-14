@@ -20,16 +20,20 @@ const getSpecificMessageDataInDb =async (email:string) => {
     return result;
   }
 
-const updateSingleMessageDataInDb =async (userEmail:string, payload:message) => {
+const updateSingleMessageDataInDb =async (userEmail:string, payload:message,subcategory:string) => {
     const result = await messageModal.findOneAndUpdate(
         { userEmail: userEmail },
-        { $push: { messages: payload } },
+        { $push: { messages: payload },subCategory: subcategory},
         { new: true }
     );
     return result;
   }
 const GetAllMessageDataInDb =async () => {
-    const result = await messageModal.find().select('userName photoUrls userEmail').sort({ "date": -1 })
+    const result = await messageModal.find().select('userName photoUrls userEmail subCategory').sort({ "date": -1 })
+    return result;
+  }
+const GetSubCategoryMessageDataInDb =async (payload:string) => {
+    const result = await messageModal.find({subCategory:payload}).select('userName photoUrls userEmail').sort({ "date": -1 })
     return result;
   }
 
@@ -38,5 +42,6 @@ export const messagesData = {
     getSingleMessageDataInDb,
     updateSingleMessageDataInDb,
     GetAllMessageDataInDb,
-    getSpecificMessageDataInDb
+    getSpecificMessageDataInDb,
+    GetSubCategoryMessageDataInDb
 }
