@@ -2,6 +2,7 @@ import { message } from "./message.interface"
 import { messageModal } from "./message.model"
 
 const saveMessageInDb =async (messageData:message) => {
+  console.log(messageData);
   const existingUser = await messageModal.findOne({ userEmail: messageData.userEmail })
     if (existingUser) {
       return 'user already exist'
@@ -33,7 +34,11 @@ const GetAllMessageDataInDb =async () => {
     return result;
   }
 const GetSubCategoryMessageDataInDb =async (payload:string) => {
-    const result = await messageModal.find({subCategory:payload}).select('userName photoUrls userEmail').sort({ "date": -1 })
+    const result = await messageModal.find({subCategory:payload}).select('userName photoUrls userEmail subCategory').sort({ "date": -1 })
+    return result;
+  }
+const GetSubCategoryTodaysMessageDataInDb =async (payload:string,today:message) => {
+    const result = await messageModal.find({subCategory:payload ,date: { $gte: today }},).select('userName photoUrls userEmail subCategory').sort({ "date": -1 })
     return result;
   }
 
@@ -43,5 +48,6 @@ export const messagesData = {
     updateSingleMessageDataInDb,
     GetAllMessageDataInDb,
     getSpecificMessageDataInDb,
-    GetSubCategoryMessageDataInDb
+    GetSubCategoryMessageDataInDb,
+    GetSubCategoryTodaysMessageDataInDb
 }

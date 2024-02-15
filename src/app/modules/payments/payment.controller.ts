@@ -43,10 +43,19 @@ const getAllPaymentFromDb = catchAsync(async (req, res) => {
         results
     );
 })
+const getTodaysAllPaymentFromDb = catchAsync(async (req, res) => {
+    const today= new Date(); 
+    today.setHours(0, 0, 0, 0);
+        const results = await payments.getTodaysAllPaymentInDb({today});
+        res.status(httpStatus.OK).json(
+        results
+    );
+})
 
 export const paymentsControllers = {
     createPaymentIntentFromDb,
     savePaymentsDataInDatabase,
     getAllPaymentFromDb,
-    getSinglePaymentsDataFromDb
+    getSinglePaymentsDataFromDb,
+    getTodaysAllPaymentFromDb
 }

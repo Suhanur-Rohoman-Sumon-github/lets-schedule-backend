@@ -14,5 +14,8 @@ export type schedule ={
     dateAndTime:string,
     role:string,
     currentPackag:string
+    createdAt:Date
 }
+
+
 

@@ -10,5 +10,6 @@ router.post("/create-payment-intent",paymentsControllers.createPaymentIntentFrom
 router.post("/save-payment-history", validateRequest(paymentsValidationSchema) ,paymentsControllers.savePaymentsDataInDatabase)
 router.get("/single-user-payments",paymentsControllers.getSinglePaymentsDataFromDb)
 router.get("/all-payments",paymentsControllers.getAllPaymentFromDb)
+router.get("/todays-payments",paymentsControllers.getTodaysAllPaymentFromDb)
 
 export const  PaymentRouter = router

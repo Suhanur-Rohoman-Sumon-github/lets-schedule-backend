@@ -2,6 +2,7 @@
 import { ScheduleModel } from "./schedule.model";
 import {  schedule } from "./schedul.interface";
 import dotenv from 'dotenv'
+import { GetTodaysDateInterfaceProps } from "../../GlobalInterface/dateInterface";
 dotenv.config()
 const creatEventInDb =async (event:schedule) => {
     const result = await ScheduleModel.create(event)
@@ -13,6 +14,11 @@ const getEventsFromDB = async (email: string) => {
 };
 const getAllEventsFromDB = async () => {
     const result = await ScheduleModel.find();
+    return result;
+};
+const getTodaysAllEventsFromDB = async ({ today }: GetTodaysDateInterfaceProps) => {
+    const result = await ScheduleModel.find({ createdAt: { $gte: today } });
+    
     return result;
 };
 const getSingleEventsFromDB = async (id: string) => {
@@ -49,4 +55,5 @@ export const scheduler = {
     updateDateAndTimeInMongoDB,
     getAllEventsFromDB,
     getSpecificDateDataInDb,  
+    getTodaysAllEventsFromDB
 }

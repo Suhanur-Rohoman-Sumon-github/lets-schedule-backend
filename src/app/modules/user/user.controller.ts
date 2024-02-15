@@ -21,6 +21,14 @@ const getUserFromDb =catchAsync(async (req, res) => {
        results
     ) 
 })
+const getTodaysUserFromDb =catchAsync(async (req, res) => {
+  const today= new Date(); // Get today's date
+    today.setHours(0, 0, 0, 0);
+  const results = await UserServises.getTodaysAllUserDB({today})
+    res.status(httpStatus.OK).json(
+       results
+    ) 
+})
 
 const getIsAdmFromDb =catchAsync(async (req, res) => {
   const email = req.query.email as string
@@ -116,5 +124,6 @@ const getAllProUserFromDb =catchAsync(async (req, res) => {
     makeAUserProFromDb,
     getAllProUserFromDb,
     getIsModeratorFromDb,
-    getIsUserFromDb
+    getIsUserFromDb,
+    getTodaysUserFromDb
   }

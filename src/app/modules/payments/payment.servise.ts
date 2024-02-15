@@ -2,6 +2,7 @@ import { payments as paymentsInterface } from './payments.interface';
 import Stripe from 'stripe';
 import { paymentsModel } from './payments.model';
 import config from '../../config';
+import { GetTodaysDateInterfaceProps } from '../../GlobalInterface/dateInterface';
 
 if (!config.STRIPE_SECRET_KEY) {
   throw new Error('Stripe secret key is not set in the environment variables');
@@ -44,10 +45,15 @@ const getAllPaymentInDb =async () => {
   const result = await paymentsModel.find();
   return result;
 }
+const getTodaysAllPaymentInDb =async ({ today }: GetTodaysDateInterfaceProps) => {
+  const result = await paymentsModel.find({ createdAt: { $gte: today } });
+  return result;
+}
 
 export const payments = {
   createPaymentIntentInDb,
   savePaymentsDataInDb,
   getSinglePaymentsDataInDb,
-  getAllPaymentInDb
+  getAllPaymentInDb,
+  getTodaysAllPaymentInDb
 };

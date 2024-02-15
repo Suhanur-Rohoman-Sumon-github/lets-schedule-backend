@@ -5,5 +5,6 @@ export type payments = {
     transitionId:string,
     date:string,
     amount:number,
-    packages:string
+    packages:string,
+    createdAt:Date
    }

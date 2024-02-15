@@ -1,5 +1,6 @@
 import { userModel } from "./user.model"
 import { user } from "./user.interface"
+import { GetTodaysDateInterfaceProps } from "../../GlobalInterface/dateInterface";
 
 // create  a new user into db
 const creatUserIntoDB = async (user: user) => {
@@ -15,6 +16,11 @@ const creatUserIntoDB = async (user: user) => {
   // handle get all user
   const getAllUserDB = async () => {
     const result = await  userModel.find()
+    return result
+  }
+  // handle get all user
+  const getTodaysAllUserDB = async ({ today }: GetTodaysDateInterfaceProps) => {
+    const result = await  userModel.find({ createdAt: { $gte: today } })
     return result
   }
 
@@ -106,5 +112,6 @@ const creatUserIntoDB = async (user: user) => {
     makeAUserProInDB,
     getAllProUserInDb,
     getIsModeratorInDB,
-    getIsUserInDB
+    getIsUserInDB,
+    getTodaysAllUserDB
   }

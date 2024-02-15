@@ -9,6 +9,7 @@ const paymentsSchema = new Schema<payments>({
     date: { type: String, required: [true, "date is required"] },
     amount: { type: Number, required: [true, "amount is required"] },
     packages: { type: String,  },
+    createdAt:{type:Date,default:Date.now()}
   });
   
   export const paymentsModel = model<payments>("payments", paymentsSchema);

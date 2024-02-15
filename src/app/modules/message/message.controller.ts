@@ -6,7 +6,6 @@ import { messagesData } from "./message.services";
 
 const saveMessageDataInDatabase  = catchAsync( async (req, res) => {
     const messages = req.body.messages
-    
     const results = await messagesData.saveMessageInDb(messages);
     sendResponse(res,{
         statusCode:httpStatus.OK,
@@ -28,7 +27,7 @@ const saveMessageDataInDatabase  = catchAsync( async (req, res) => {
         const email:  string = req.query.emails as string;
         const newMessage = req.body.newMessage
         const subcategory = req.body.subcategory
-        console.log(subcategory);
+        
         const results = await messagesData.updateSingleMessageDataInDb(email,newMessage,subcategory);
         sendResponse(res,{
             statusCode:httpStatus.OK,
@@ -48,6 +47,17 @@ const saveMessageDataInDatabase  = catchAsync( async (req, res) => {
     const GetSubCategoryMessageDataFromDb = catchAsync(async (req, res) => { 
         const subCategory:  string = req.query.subCategory as string;
         const results = await messagesData.GetSubCategoryMessageDataInDb(subCategory);
+        sendResponse(res,{
+            statusCode:httpStatus.OK,
+            success:true,
+            message:"new message added successfully ",
+            data:results
+        })})
+    const GetSubCategoryTodaysMessageDataFromDb = catchAsync(async (req, res) => { 
+        const subCategory:  string = req.query.subCategory as string;
+        const today = new Date(); // Get today's date
+        today.setHours(0, 0, 0, 0);
+        const results = await messagesData.GetSubCategoryTodaysMessageDataInDb(subCategory,today);
         sendResponse(res,{
             statusCode:httpStatus.OK,
             success:true,

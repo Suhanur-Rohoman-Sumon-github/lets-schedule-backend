@@ -4,6 +4,7 @@ import catchAsync from "../../../utils/cathAsync";
 import sendResponse from "../../../utils/sendRespons";
 import httpStatus from "http-status";
 
+
 // create new events
 const creatNewEvent = catchAsync(async (req, res) => {
     const event = req.body.event;
@@ -29,6 +30,13 @@ const Events = catchAsync(async (req, res) => {
 // get all the event already have been created yet
 const AllEvents = catchAsync(async (req, res) => {
     const results = await scheduler.getAllEventsFromDB();
+    res.status(200).json(results)})
+;
+// get all the event already have been created yet
+const todaysAllEvents = catchAsync(async (req, res) => {
+    const today= new Date(); // Get today's date
+    today.setHours(0, 0, 0, 0);
+    const results = await scheduler.getTodaysAllEventsFromDB({ today });
     res.status(200).json(results)})
 ;
 
@@ -85,5 +93,6 @@ export const EventController = {
     updateDateAndTime,
     AllEvents,
     getSingleDateAndTimeFromDb,
+    todaysAllEvents
     
 };

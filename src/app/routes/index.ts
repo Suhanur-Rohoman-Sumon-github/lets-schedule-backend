@@ -4,6 +4,7 @@ import { UserRouter } from "../modules/user/user.route";
 import { EventRouter } from "../modules/schedule/schedule.route";
 import { EmailRote } from "../modules/mail/mail.route";
 import { messageRoute } from "../modules/message/message.route";
+import { VisitorRouter } from "../modules/visitor/visitor.route";
 
 const router = Router()
 
@@ -27,6 +28,10 @@ const moduleRoute = [
     {
         path:"/message",
         route:messageRoute
+    },
+    {
+        path:"/visitor",
+        route:VisitorRouter
     }
 ]
 

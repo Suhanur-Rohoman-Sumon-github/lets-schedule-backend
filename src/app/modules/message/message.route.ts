@@ -8,5 +8,6 @@ router.get("/single-message" ,messageController.getSingleMessageDataFromDb)
 router.patch("/update-message" ,messageController.updateMessageDataFromDb)
 router.get("/all-message" ,messageController.GetAllMessageDataFromDb)
 router.get("/category-message" ,messageController.GetSubCategoryMessageDataFromDb)
+router.get("/todays-message" ,messageController.GetSubCategoryMessageDataFromDb)
 
 export const  messageRoute = router
