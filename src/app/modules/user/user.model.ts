@@ -9,7 +9,8 @@ const userSchema = new Schema<user>({
     role: { type: String, default: "user" }, 
     currentPlane: { type: String, default: "free" }, 
     ban: { type: Boolean, default: false }, 
-    currentPackage: String,
+    currentPackage:{ String},
+    createdAt:{type:Date,default:Date.now()}
 });
 
 

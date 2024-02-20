@@ -8,6 +8,7 @@ export type user={
     role:string,
     currentPlane:string,
     ban:boolean,
-    currentPackage:string
+    currentPackage:string,
+    createdAt:Date
 }
 

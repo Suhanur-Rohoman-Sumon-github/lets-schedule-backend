@@ -112,6 +112,14 @@ const getAllProUserFromDb =catchAsync(async (req, res) => {
       results      
       ) 
   })
+const getAllTodaysProUserFromDb =catchAsync(async (req, res) => {
+  const today= new Date(); // Get today's date
+  today.setHours(0, 0, 0, 0);
+  const results = await UserServises.getAllTodaysProUserInDb({today})
+    res.status(200).json( 
+      results      
+      ) 
+  })
 
   export const UserController = {
     creatUser,

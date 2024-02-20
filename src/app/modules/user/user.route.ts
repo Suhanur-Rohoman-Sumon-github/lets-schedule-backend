@@ -18,7 +18,8 @@ router.get("/get-isModerator",UserController.getIsModeratorFromDb)
 router.get("/get-isUser",UserController.getIsUserFromDb)
 router.get("/get-isBan",UserController.getAUserBanFromDb)
 router.get("/get-all-pro-user",UserController.getAllProUserFromDb)
-router.get("/get-all-Todays-user",UserController.getAllProUserFromDb)
+router.get("/get-all-Todays-user",UserController.getTodaysUserFromDb)
+router.get("/get-all-Todays-pro-user",UserController.getAllProUserFromDb)
 
 
 export const UserRouter = router

@@ -7,7 +7,7 @@ const creatUserIntoDB = async (user: user) => {
   const existingUser = await userModel.findOne({ email: user?.email });
 
   if (existingUser) {
-    throw new Error("user already exists")
+    return ("user already exists")
   }
     const result = await userModel.create(user)
     return result
@@ -98,6 +98,10 @@ const creatUserIntoDB = async (user: user) => {
     const result = await  userModel.find({ currentPlane:"pro" })
     return result
   }
+  const getAllTodaysProUserInDb = async ({ today }: GetTodaysDateInterfaceProps) => {
+    const result = await  userModel.find({ currentPlane:"pro" , createdAt: { $gte: today } } )
+    return result
+  }
   
   // export all the function in one object
   export const UserServises = {
@@ -113,5 +117,6 @@ const creatUserIntoDB = async (user: user) => {
     getAllProUserInDb,
     getIsModeratorInDB,
     getIsUserInDB,
-    getTodaysAllUserDB
+    getTodaysAllUserDB,
+    getAllTodaysProUserInDb
   }

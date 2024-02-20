@@ -30,11 +30,11 @@ const updateSingleMessageDataInDb =async (userEmail:string, payload:message,subc
     return result;
   }
 const GetAllMessageDataInDb =async () => {
-    const result = await messageModal.find().select('userName photoUrls userEmail subCategory').sort({ "date": -1 })
+    const result = await messageModal.find().select('userName photoUrls userEmail date').sort({ "date": -1 })
     return result;
   }
 const GetSubCategoryMessageDataInDb =async (payload:string) => {
-    const result = await messageModal.find({subCategory:payload}).select('userName photoUrls userEmail subCategory').sort({ "date": -1 })
+    const result = await messageModal.find({subCategory:payload}).select('userName photoUrls userEmail date').sort({ "date": -1 })
     return result;
   }
 const GetSubCategoryTodaysMessageDataInDb =async (payload:string,today:message) => {
